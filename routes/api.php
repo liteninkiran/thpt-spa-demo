@@ -18,8 +18,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('users', 'UserController@getUsers');
-Route::get('user/{id}', 'UserController@getUser');
-Route::post('users/create', 'UserController@createUser');
-Route::put('users/update/{id}', 'UserController@updateUser');
-Route::delete('users/delete/{id}', 'UserController@deleteUser');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('users', 'UserController@getUsers');
+    Route::get('user/{id}', 'UserController@getUser');
+    Route::post('users/create', 'UserController@createUser');
+    Route::put('users/update/{id}', 'UserController@updateUser');
+    Route::delete('users/delete/{id}', 'UserController@deleteUser');
+});
