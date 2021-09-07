@@ -20,4 +20,9 @@ class UserController extends Controller
 
         return response()->json($user, 200);
     }
+
+    public function createUser(Request $request) {
+        $user = User::create($request->all());
+        return response($user, 201);
+    }
 }
